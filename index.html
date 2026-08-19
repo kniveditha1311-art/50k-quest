@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#6d28d9">
+<title>₹50K Quest</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f3ff;color:#241c30;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif}
+.app{max-width:600px;margin:auto;padding:14px 14px 35px}.hero{background:linear-gradient(135deg,#5b21b6,#a855f7);color:#fff;border-radius:30px;padding:22px;box-shadow:0 15px 35px #5b21b633}.top{display:flex;justify-content:space-between;align-items:center}.logo{font-size:25px;font-weight:900}.level{background:#ffffff22;border:1px solid #ffffff33;padding:7px 10px;border-radius:20px;font-size:12px;font-weight:800}.hero p{margin:7px 0 18px;opacity:.9}.money{font-size:32px;font-weight:950}.barbg{height:13px;background:#ffffff25;border-radius:99px;overflow:hidden;margin:10px 0}.bar{height:100%;width:0;background:#fef08a;border-radius:99px;transition:.4s}.herofoot{display:flex;justify-content:space-between;font-size:12px;opacity:.9}
+.card{background:#fff;border:1px solid #e7dff0;border-radius:24px;padding:18px;margin-top:14px;box-shadow:0 8px 25px #4c1d9510}.title{font-size:18px;font-weight:900}.muted{font-size:12px;color:#776b82}.mission{background:linear-gradient(135deg,#fff7ed,#fff);border-color:#f4ddc0}.box{width:145px;height:125px;margin:17px auto 8px;border-radius:25px;background:linear-gradient(145deg,#fbbf24,#f59e0b);display:grid;place-items:center;font-size:60px;box-shadow:0 12px 25px #f59e0b35;cursor:pointer;transition:.2s}.box:hover{transform:translateY(-3px) rotate(-1deg)}.amount{text-align:center;font-size:34px;font-weight:950;color:#6d28d9;min-height:42px}.center{text-align:center}.button{border:0;border-radius:15px;padding:13px 16px;font-weight:900;font-size:14px;cursor:pointer}.purple{background:#6d28d9;color:#fff}.soft{background:#eee7ff;color:#5b21b6}.green{background:#dcfce7;color:#087f5b}.full{width:100%}.tokens{display:flex;gap:7px;justify-content:center;margin-top:10px}.token{padding:7px 10px;border-radius:20px;background:#fff3cd;font-size:11px;font-weight:800}.wheelwrap{display:flex;justify-content:center;margin:12px}.wheel{width:210px;height:210px;border-radius:50%;border:8px solid #fff;box-shadow:0 10px 28px #6d28d933;display:grid;place-items:center;background:conic-gradient(#ddd6fe 0 30deg,#f5d0fe 30deg 60deg,#c4b5fd 60deg 90deg,#fde68a 90deg 120deg,#ddd6fe 120deg 150deg,#f5d0fe 150deg 180deg,#c4b5fd 180deg 210deg,#fde68a 210deg 240deg,#ddd6fe 240deg 270deg,#f5d0fe 270deg 300deg,#c4b5fd 300deg 330deg,#fde68a 330deg 360deg);transition:transform 2.5s cubic-bezier(.15,.8,.2,1)}.wheel span{width:68px;height:68px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#6d28d9;font-weight:950}.pointer{margin:auto;width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-top:20px solid #ef4444}.result{text-align:center;font-size:24px;font-weight:950;min-height:32px;margin:8px}.choicegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.choice{background:#f3eff7;border:1px solid #e4dbea}.choice.used{opacity:.35}.choice.selected{background:#6d28d9;color:#fff}.input{width:100%;padding:12px;border:1px solid #ddd3e5;border-radius:13px;font-size:16px;margin-top:9px}.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.badge{padding:11px 5px;text-align:center;border:1px solid #e5ddea;border-radius:15px;opacity:.35}.badge.on{opacity:1;background:#fff9e8;border-color:#efd28a}.badge i{font-style:normal;font-size:25px;display:block}.badge b{font-size:10px}.events{display:grid;gap:8px;margin-top:10px}.event{padding:12px;border-radius:15px;background:#faf5ff;border:1px solid #eadff3}.event b{display:block}.history{display:grid;gap:6px;margin-top:10px}.hist{display:flex;align-items:center;gap:10px;padding:9px;border-bottom:1px solid #eee8f1}.day{width:34px;height:34px;border-radius:11px;background:#eee7ff;color:#5b21b6;display:grid;place-items:center;font-weight:900}.hist main{flex:1}.small{font-size:11px;color:#81758b}.done{color:#07845f;font-size:11px;font-weight:900}
+@media(max-width:420px){.choicegrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<section class="hero">
+<div class="top"><div class="logo">💜 ₹50K QUEST</div><div class="level" id="level">LEVEL 1</div></div>
+<p>Your little savings adventure. Play every day. Win every week.</p>
+<div class="money" id="saved">₹0</div>
+<div class="barbg"><div class="bar" id="bar"></div></div>
+<div class="herofoot"><span id="progress">0% of ₹50K</span><span id="streak">🔥 0 day streak</span></div>
+</section>
+
+<section class="card mission">
+<div class="title">🎁 Today's Mystery Box</div><div class="muted" id="today"></div>
+<div class="box" id="box" onclick="reveal()">🎁</div>
+<div class="amount" id="dailyAmount">Tap the box</div>
+<div class="center"><button class="button purple" id="revealBtn" onclick="reveal()">OPEN MY MYSTERY BOX ✨</button></div>
+<div class="tokens"><span class="token">🛟 Skip: <b id="skip">1</b></span><span class="token">🍀 Lucky: random</span></div>
+<input class="input" id="dailyActual" type="number" min="0" placeholder="What did you actually save?">
+<button class="button green full" style="margin-top:8px" onclick="saveDaily()">I SAVED IT ✓</button>
+</section>
+
+<section class="card">
+<div class="title">🎡 Wednesday Boss Battle</div><div class="muted">Your weekly saving mission. Spin once each week.</div>
+<div class="pointer"></div><div class="wheelwrap"><div class="wheel" id="wheel"><span>SPIN</span></div></div>
+<button class="button purple full" id="spinBtn" onclick="spin()">SPIN MY WEEKLY GOAL 🎉</button>
+<div class="result" id="weeklyResult">Ready?</div>
+<div class="choicegrid" id="numbers"></div>
+<input class="input" id="weeklyActual" type="number" min="0" placeholder="What did you actually save?">
+<button class="button green full" style="margin-top:8px" onclick="saveWeekly()">COMPLETE WEEK ✓</button>
+<div class="center" style="margin-top:8px"><button class="button soft" onclick="changeFate()">🛡️ Change My Fate (<span id="fate">1</span>)</button></div>
+</section>
+
+<section class="card">
+<div class="title">✨ Random Events</div>
+<div class="events" id="events"></div>
+</section>
+
+<section class="card">
+<div class="title">🏆 Quest Badges</div>
+<div class="badges" id="badges"></div>
+</section>
+
+<section class="card">
+<div class="title">📖 Quest Journal</div>
+<div class="history" id="history"></div>
+<button class="button soft full" style="margin-top:10px" onclick="resetQuest()">Reset Quest</button>
+</section>
+</div>
+
+<script>
+const GOAL=50000,START=new Date(2026,7,19),BASE=250;
+let s=load(),dailyMode="normal";
+function load(){try{return JSON.parse(localStorage.getItem("quest50k")||'{"saved":0,"daily":{},"weeks":{},"used":[],"streak":0,"fate":1,"events":[]}')}catch(e){return {saved:0,daily:{},weeks:{},used:[],streak:0,fate:1,events:[]}}}
+function save(){try{localStorage.setItem("quest50k",JSON.stringify(s))}catch(e){}render()}
+function key(){let d=new Date();return d.toISOString().slice(0,10)}
+function money(n){return "₹"+Number(n).toLocaleString("en-IN")}
+function week(){let d=new Date();d.setHours(0,0,0,0);return Math.max(0,Math.min(19,Math.floor((d-START)/604800000)))}
+function reveal(){let k=key();if(s.daily[k]?.revealed){document.getElementById("dailyAmount").textContent=money(s.daily[k].amount);return}let r=[[20,50],[50,150],[100,250]][Math.floor(Math.random()*3)],a=Math.floor((Math.random()*(r[1]-r[0])+r[0])/10)*10;if(Math.random()<.1){a+=50;s.events.unshift({icon:"🍀",title:"LUCKY DAY!",text:"Your mystery amount got a ₹50 boost!"})}s.daily[k]={amount:a,revealed:true,saved:false};document.getElementById("dailyAmount").textContent=money(a);document.getElementById("revealBtn").textContent="REVEALED ✨";save()}
+function saveDaily(){let k=key(),d=s.daily[k];if(!d?.revealed)return alert("Open your Mystery Box first!");if(d.saved)return alert("Today's mission is already complete!");let a=Number(document.getElementById("dailyActual").value)||d.amount;d.actual=a;d.saved=true;s.saved+=a;s.streak++;document.getElementById("dailyAmount").textContent="🎉 "+money(a);s.events.unshift({icon:"⭐",title:"DAILY QUEST COMPLETE",text:"You saved "+money(a)+" today."});save()}
+function available(){return [...Array(20)].map((_,i)=>i+1).filter(n=>!s.used.includes(n))}
+function pick(n){if(s.weeks[week()])return alert("This weekly mission is already complete!");s.pending=n;document.getElementById("weeklyResult").textContent="#"+n+" → "+money(n*BASE);renderNums()}
+function spin(){let a=available();if(!a.length)return alert("All 20 weekly numbers are used!");let n=a[Math.floor(Math.random()*a.length)];document.getElementById("spinBtn").disabled=true;document.getElementById("wheel").style.transform="rotate("+(900+(n-1)*18)+"deg)";setTimeout(()=>{pick(n);document.getElementById("spinBtn").disabled=false;document.getElementById("weeklyResult").textContent="🎉 #"+n+" → "+money(n*BASE)},2600)}
+function changeFate(){if(!s.fate)return alert("No Change My Fate tokens left!");let a=available();if(a.length<2)return;let n=a[Math.floor(Math.random()*a.length)];s.pending=n;s.fate--;document.getElementById("weeklyResult").textContent="🛡️ New fate: #"+n+" → "+money(n*BASE);renderNums();save()}
+function saveWeekly(){let w=week(),n=s.pending;if(n==null)return alert("Spin or choose a weekly number first!");if(s.weeks[w])return alert("This weekly mission is already complete!");let a=Number(document.getElementById("weeklyActual").value)||n*BASE;s.used.push(n);s.weeks[w]={number:n,planned:n*BASE,actual:a};s.saved+=a;s.events.unshift({icon:"🏆",title:"WEEKLY BOSS DEFEATED",text:"You saved "+money(a)+" this week."});s.pending=null;save()}
+function renderNums(){let e=document.getElementById("numbers");e.innerHTML="";for(let n=1;n<=20;n++){let b=document.createElement("button");b.className="button choice "+(s.used.includes(n)?"used ":"")+(s.pending===n?"selected":"");b.textContent=n+" · "+money(n*BASE);if(!s.used.includes(n))b.onclick=()=>pick(n);e.appendChild(b)}}
+function render(){let p=Math.min(100,s.saved/GOAL*100),lv=Math.min(10,Math.floor(s.saved/5000)+1);document.getElementById("saved").textContent=money(s.saved);document.getElementById("bar").style.width=p+"%";document.getElementById("progress").textContent=Math.round(p)+"% of ₹50K";document.getElementById("streak").textContent="🔥 "+s.streak+" day streak";document.getElementById("level").textContent="LEVEL "+lv;document.getElementById("today").textContent=new Date().toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"short"});let d=s.daily[key()];if(d?.revealed)document.getElementById("dailyAmount").textContent=money(d.actual||d.amount);document.getElementById("skip").textContent=s.skip||1;document.getElementById("fate").textContent=s.fate;renderNums();renderBadges();renderEvents();renderHistory()}
+function renderBadges(){let d=[["🌱","Quest begins",s.saved>0],["🌸","₹5K",s.saved>=5000],["💜","₹10K",s.saved>=10000],["🌟","Halfway",s.saved>=25000],["🔥","₹35K",s.saved>=35000],["👑","₹50K",s.saved>=50000]];document.getElementById("badges").innerHTML=d.map(x=>`<div class="badge ${x[2]?"on":""}"><i>${x[0]}</i><b>${x[1]}</b></div>`).join("")}
+function renderEvents(){document.getElementById("events").innerHTML=(s.events.slice(0,4).length?s.events.slice(0,4):[{icon:"🎮",title:"QUEST READY",text:"Open today's mystery box to begin!"}]).map(x=>`<div class="event"><b>${x.icon} ${x.title}</b><span class="muted">${x.text}</span></div>`).join("")}
+function renderHistory(){let e=document.getElementById("history");e.innerHTML="";for(let i=0;i<20;i++){let x=s.weeks[i],d=document.createElement("div");d.className="hist";d.innerHTML=`<span class="day">${i+1}</span><main><b>${x?"#"+x.number+" · "+money(x.planned):"Weekly mission locked"}</b><span class="small">${x?"Saved "+money(x.actual):"Spin when you're ready"}</span></main>${x?'<span class="done">✓</span>':""}`;e.appendChild(d)}}
+function resetQuest(){if(confirm("Start the ₹50K Quest over?")){s={saved:0,daily:{},weeks:{},used:[],streak:0,fate:1,events:[]};save()}}
+render();
+</script>
+</body>
+</html>
